@@ -3,9 +3,8 @@ import injectSheet  from "react-jss";
 import { Route, Link, Switch, Redirect } from "react-router-dom";
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-
 import {toggleTitleColor} from './store';
-
+import MemeMachine from './components/MemeMachine';
 
 
 const styles = theme => ({
@@ -34,7 +33,7 @@ const styles = theme => ({
     '& figcaption': {
       fontFamily: 'serif',
       textAlign: 'center',
-      fontSize: '2rem', 
+      fontSize: '2rem',
       '&:before, &:after':{
         display: 'inline',
         content: "\""
@@ -48,7 +47,7 @@ const styles = theme => ({
     color: theme.palette.secondary
   },
 
-  
+
 });
 
 const stp = (state) => ({
@@ -60,7 +59,7 @@ const dtp = (dispatch) => bindActionCreators( {
 }, dispatch)
 
 export const App = (props) => {
-  
+
     const { classes, titleColor, toggleTitleColor } = props;
 
     const [memes, setMemes] = useState([]);
@@ -68,7 +67,7 @@ export const App = (props) => {
     useEffect( () => {
       fetch('http://localhost:8000/api/memes/').then( res => res.json()).then( setMemes);
     }, [])
-    
+
     console.info("memes", memes)
 
     return (
@@ -83,7 +82,7 @@ export const App = (props) => {
                 <video
                   width="800"
                   height="450"
-                  playsInline                  
+                  playsInline
                   autoPlay
                   muted
                   loop
@@ -137,10 +136,10 @@ export const App = (props) => {
                       User can enter text that is placed over the video <em>still</em>
                     </li>
                     <li>
-                      User can save this personalized content to the server, for later use 
+                      User can save this personalized content to the server, for later use
                     </li>
                     <li>
-                      User can retrieve her meme via an url 
+                      User can retrieve her meme via an url
                     </li>
                   </ul>
                 </section>
@@ -162,7 +161,7 @@ export const App = (props) => {
                     <li>Make the server secure enough to deploy</li>
                     <li>Download the meme as an image file</li>
                     <li>Add super cool text effects to the text overlay</li>
-                    <li>Push the resulting meme to a social media API</li>                    
+                    <li>Push the resulting meme to a social media API</li>
                   </ul>
                 </section>
                 <section>
@@ -174,6 +173,9 @@ export const App = (props) => {
                 </section>
               </section>
             </Route>
+            <Route path="/machine">
+              <MemeMachine/>
+            </Route>
             <Redirect to="/" />
           </Switch>
         </main>
@@ -183,6 +185,7 @@ export const App = (props) => {
             <li><Link to="/home">Home</Link></li>
             <li><Link to="/memes">Memes</Link></li>
             <li><Link to="/readme">Readme</Link></li>
+            <li><Link to="/machine">Machine</Link></li>
             </ul>
           </nav>
         </footer>
