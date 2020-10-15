@@ -1,4 +1,4 @@
-#Project description
+# Project description
 
 Since the project is not functional, I wanted to take some time to explain the reasoning behind what it is
 that I wanted to achieve. I've tried to solve this in many ways so what you are seeing now (inside `MemeMachine.js`) is
